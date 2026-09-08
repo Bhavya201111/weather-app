@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Weather App</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>🌤️ Weather App</h1>
+
+        <p class="subtitle">
+            Check current weather and 7-day forecast
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="cityInput"
+                placeholder="Enter city name..."
+            >
+
+            <button onclick="searchWeather()">
+                Search
+            </button>
+
+        </div>
+
+
+        <!-- LOADING -->
+
+        <div id="loading"></div>
+
+
+        <!-- ERROR -->
+
+        <div id="error"></div>
+
+
+        <!-- CURRENT WEATHER -->
+
+        <div id="weatherCard" class="weather-card">
+
+            <h2 id="cityName">
+                Search for a city
+            </h2>
+
+            <div class="temperature">
+
+                <span id="temperature">
+                    --
+                </span>
+
+                °C
+
+            </div>
+
+
+            <p id="condition">
+                --
+            </p>
+
+
+            <div class="details">
+
+                <div class="detail-box">
+
+                    <span>💧</span>
+
+                    <strong>Humidity</strong>
+
+                    <p>
+                        <span id="humidity">--</span>%
+                    </p>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <span>💨</span>
+
+                    <strong>Wind</strong>
+
+                    <p>
+                        <span id="wind">--</span> km/h
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FORECAST -->
+
+        <h2 class="forecast-title">
+            7-Day Forecast
+        </h2>
+
+        <div id="forecast"></div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
