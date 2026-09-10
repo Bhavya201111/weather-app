@@ -38,7 +38,7 @@ async def geocode_city(city: str):
 
     params = {
         "name": city,
-        "count": 1,
+        "count": 10,
         "language": "en",
         "format": "json"
     }
@@ -68,14 +68,18 @@ async def geocode_city(city: str):
                 detail="City not found"
             )
 
-        location = data["results"][0]
+        locations = []
 
-        return {
+        for location in data["results"]:
+
+            locations.append({
             "name": location["name"],
             "country": location.get("country", ""),
             "latitude": location["latitude"],
             "longitude": location["longitude"]
-        }
+    })
+
+        return locations
 
     except httpx.RequestError:
 
@@ -108,6 +112,14 @@ async def get_weather(
             "relative_humidity_2m,"
             "weather_code,"
             "wind_speed_10m"
+        ),
+
+        "hourly": (
+            "temperature_2m,"
+            "relative_humidity_2m,"
+            "weather_code,"
+            "wind_speed_10m,"
+            "precipitation_probability"
         ),
 
         "daily": (

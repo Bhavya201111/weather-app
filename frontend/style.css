@@ -304,3 +304,120 @@ h1 {
     }
 
 }
+
+.search-container {
+    position: relative;
+    flex: 1;
+}
+
+.search-container input {
+    width: 100%;
+}
+
+#suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    z-index: 100;
+    text-align: left;
+    overflow: hidden;
+}
+
+.suggestion {
+    padding: 12px 15px;
+    cursor: pointer;
+}
+
+.suggestion:hover {
+    background: #f0f5ff;
+}
+
+#hourlyForecast {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+
+.hourly-card {
+
+    background: #f2f6ff;
+
+    padding: 18px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow:
+        0 4px 10px
+        rgba(0, 0, 0, 0.08);
+
+}
+
+
+.hour-time {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+
+}
+
+
+.hour-icon {
+
+    font-size: 35px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.hour-temp {
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+}
+
+
+.hour-condition {
+
+    margin-bottom: 12px;
+
+}
+
+
+.hourly-card div {
+
+    margin: 5px 0;
+
+}
+
+
+@media (max-width: 700px) {
+
+    #hourlyForecast {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}

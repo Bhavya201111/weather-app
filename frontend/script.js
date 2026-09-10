@@ -1,5 +1,73 @@
 const API_URL = "http://127.0.0.1:8000";
 
+let selectedLocation = null;
+let searchTimer = null;
+
+document.getElementById("cityInput").addEventListener("input", function () {
+    selectedLocation = null;
+    const city = this.value.trim();
+
+    clearTimeout(searchTimer);
+
+    if (city.length < 2) {
+        document.getElementById("suggestions").innerHTML = "";
+        return;
+    }
+
+    searchTimer = setTimeout(() => {
+        showSuggestions(city);
+    }, 300);
+});
+
+
+async function showSuggestions(city) {
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/geocode?city=${encodeURIComponent(city)}`
+        );
+
+        if (!response.ok) return;
+
+        const locations = await response.json();
+
+        const suggestions =
+            document.getElementById("suggestions");
+
+        suggestions.innerHTML = "";
+
+        locations.forEach(location => {
+
+            const div = document.createElement("div");
+
+            div.className = "suggestion";
+
+            div.innerText =
+                `${location.name}, ${location.country}`;
+
+            div.onclick = function () {
+
+                selectedLocation = location;
+
+                document.getElementById("cityInput").value =
+                    `${location.name}, ${location.country}`;
+
+                suggestions.innerHTML = "";
+
+            };
+
+            suggestions.appendChild(div);
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+}
+
 
 async function searchWeather() {
 
@@ -42,8 +110,11 @@ async function searchWeather() {
         }
 
 
-        const location =
+        const locations =
             await locationResponse.json();
+
+        const location =
+            selectedLocation || locations[0];
 
 
         // STEP 2:
@@ -166,8 +237,20 @@ function displayForecast(daily) {
             document.createElement("div");
 
 
-        card.className =
-            "forecast-card";
+        card.className = "forecast-card";
+
+        card.style.cursor = "pointer";
+
+        card.onclick = function () {
+
+            const date = daily.time[i];
+
+            window.location.href =
+                `hourly.html?date=${date}` +
+                `&lat=${selectedLocation.latitude}` +
+                `&lon=${selectedLocation.longitude}` +
+                `&city=${encodeURIComponent(selectedLocation.name)}`;
+};
 
 
         const date =
